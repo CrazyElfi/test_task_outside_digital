@@ -1,0 +1,120 @@
+*,
+*::after,
+*::before
+  box-sizing: border-box
+
+h1, h2,h3,h4, h5
+  margin: 0
+  padding: 0
+
+body
+  font-family: Lab Grotesque
+  font-weight: 400
+  font-size: 16px
+  line-height: 24px
+  color: #303030
+
+
+.container
+  position: relative
+  background: linear-gradient(100deg, #FF4F4F, #DC3131)
+  width: inherit
+  height: inherit
+  display: flex
+  justify-content: center
+  align-items: center
+
+
+.btn
+  width: 200px
+  height: 55px
+  padding: 5px 10px
+  background: none
+  border: 1px solid #ffffff
+  border-radius: 5px
+  color: #ffffff
+
+.btnPrimary
+  width: 100%
+  height: 55px
+  background: linear-gradient(255.35deg, #DC3131 0.83%, rgba(255, 79, 79, 0) 108.93%), #FF5E56
+  box-shadow: 0 0 24px rgba(234, 0, 41, 0.33)
+  border: none
+  border-radius: 6px
+  padding: 5px 10px
+  color: #ffffff
+
+.body-wrapper
+  display: flex
+  flex-direction: column
+  justify-content: flex-start
+  text-align: start
+  .title
+    margin-right: 76px
+    margin-top: 15px
+    margin-bottom: 5px
+    font-weight: bold
+  .calc
+    color: #EA0029
+    background: none
+    border: none
+    text-align: start
+    font-size: 16px
+    padding: 0
+    margin-bottom: 15px
+
+.switch__wrapper
+  display: flex
+  justify-content: flex-start
+  align-items: center
+  margin-bottom: 40px
+
+.switch
+  background: #EEF0F2
+  border: none
+  padding: 6px 12px
+  margin-right: 15px
+  border-radius: 50px
+  font-size: 14px
+  line-height: 24px
+  &.active
+    background: linear-gradient(255.35deg, #DC3131 0.83%, rgba(255, 79, 79, 0) 108.93%), #FF5E56
+    color: #ffffff
+
+.salary
+  border: 1px solid #DFE3E6
+  border-radius: 3px
+  padding: 8px 10px
+
+.text-info
+  width: 369px
+  font-size: 14px
+  line-height: 24px
+  color: #808080
+
+.checkboxes__wrapper
+  margin-top: 10px
+  .checkboxes-item
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    border-bottom: 1px solid #DFE3E6
+    label
+      font-size: 14px
+      line-height: 24px
+      color: #999999
+      margin: 15px
+      span
+        color: #000000
+
+  input[type='checkbox']
+    width: 20px
+    height: 20px
+    border: 1px solid #DFE3E6
+    box-sizing: border-box
+    border-radius: 6px
+    &:checked
+      background: linear-gradient(100deg, #FF4F4F, #DC3131)
+
+.hidden
+  display: none
