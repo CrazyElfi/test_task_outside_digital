@@ -13,18 +13,17 @@
           @close="modalFirst = false">
         <div slot="body" class="body-wrapper">
           <p class="text-info">
-            Используйте налоговый вычет чтобы погасить ипотеку досрочно. Размер налогового вычета составляет не более
-            13% от своего официального годового дохода.
+            Используйте налоговый вычет чтобы погасить ипотеку досрочно. Размер налогового вычета составляет не более 13% от своего официального годового дохода.
           </p>
           <label class="title">Ваша зарплата в месяц</label>
           <input type="number"
                  class="salary"
-                 v-model="salary"
+                 v-model.number="salary"
                  placeholder="Введите данные">
-          <!--                 @change="inputSalary"-->
 
           <button class="title calc"
-                  @click="calcSizePayoff">
+                  @click="calcSizePayoff"
+                  :disabled="isDisabledBtn">
             Рассчитать
           </button>
 
@@ -37,7 +36,6 @@
                   :key="index"
                   :id="payoff.year"
                   class="checkboxes-item">
-
 
                 <input name="checkboxPayoff"
                        type="checkbox"
@@ -85,40 +83,28 @@ export default {
     return {
       modalFirst: false,
       checkboxValue:[],
-      salary: '',
+      salary: null,
       arrPayoff: [],
       years: null
     }
   },
-  methods: {
-    submitSecondForm() {
-      // axios
-      //     .post('http://localhost:8080/...', {
-      //       name: this.modalSecond.name,
-      //       email: this.modalSecond.email
-      //     })
-      console.log('23'
-          // {
-          //   name: this.modalSecond.name,
-          //   email: this.modalSecond.email
-          // }
-      )
-      //reset
-      // this.modalSecond.name = '';
-      // this.modalSecond.email = '';
-      // this.modalSecond.show = false
-    },
-    calcSizePayoff() {
-      let payoff = this.inputSalary()
-
-      this.createTablePayoff(payoff)
-      // this.arrPayoff = []
+  computed: {
+    isDisabledBtn() {
+      return (this.salary >= 12792)
+      // 12 792 руб. Размер МРОТ в 2021 году
     },
     inputSalary() {
-      let sizeSalary = this.salary
-      let taxOfYear = (sizeSalary * 12) * 0.13
-      return taxOfYear
+      let sizeSalary = this.salary;
+      let taxOfYear = sizeSalary * 12 * 0.13;
+      return taxOfYear;
     },
+  },
+  methods: {
+    calcSizePayoff() {
+        let payoff = this.inputSalary()
+        this.createTablePayoff(payoff)
+    },
+
     createTablePayoff(payoff) {
       let blockHidden = document.querySelector('.hidden')
       blockHidden.classList.remove('hidden')
@@ -126,6 +112,7 @@ export default {
       let yearsOfPay = Math.ceil(maxSizePayoff / payoff)
 
       let sum = 0
+
       for (let i = 0; i <= yearsOfPay; ++i) {
         let payoffObj = {
           year: i + 1,
