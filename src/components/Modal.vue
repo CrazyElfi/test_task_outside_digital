@@ -12,7 +12,6 @@
           <!-- body-->
           <div class="modal-body">
             <slot name="body">
-<!--              <input type="number">-->
             </slot>
           </div>
         </div>
@@ -39,9 +38,6 @@ export default {
       }
     })
   },
-  computed: {},
-  methods: {}
-
 }
 </script>
 
@@ -50,7 +46,6 @@ export default {
 //animation
 .modal-enter .modal-leave-active
   opacity: 0
-
 
 .modal-enter .modal-content,
 .modal-leave-active .modal-content
@@ -69,18 +64,21 @@ export default {
   z-index: 998
   background-color: #999999
 
+  max-height: 100%
+  overflow: auto
+
 .modal-content
   position: relative
   width: 453px
-  //height: 476px
+  min-height: 476px
+  //max-height: 100%
+  //overflow: auto
   padding: 32px
   background-color: #fff
   border: 1px solid #dcdfe6
   transition: all .2s ease
   border-radius: 30px
   z-index: 999
-  overflow: hidden
-
 
 .modal-header
   display: flex
@@ -91,6 +89,7 @@ export default {
     font-size: 24px
   .button-close
     cursor: pointer
+    color: #EA0029
 
 .modal-body
   text-align: center

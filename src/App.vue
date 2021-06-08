@@ -11,7 +11,8 @@
           title="First modal"
           v-show="modalFirst"
           @close="modalFirst = false">
-        <div slot="body" class="body-wrapper">
+        <div slot="body"
+             class="body-wrapper">
           <p class="text-info">
             Используйте налоговый вычет чтобы погасить ипотеку досрочно. Размер налогового вычета составляет не более 13% от своего официального годового дохода.
           </p>
@@ -19,7 +20,12 @@
           <input type="number"
                  class="salary"
                  v-model.number="salary"
-                 placeholder="Введите данные">
+                 placeholder="Введите данные"
+                 title="Введите значение больше или равное 12 792 руб (Размер МРОТ в 2021 году)">
+
+<!--          <p class="errorText" v-if="!isDisabledBtn">-->
+<!--            Введите значение больше или равное 12 792 руб (Размер МРОТ в 2021 году)-->
+<!--          </p>-->
 
           <button class="title calc"
                   @click="calcSizePayoff"
@@ -27,7 +33,7 @@
             Рассчитать
           </button>
 
-          <div class="calculation hidden">
+          <div class="calculation" v-if="visible">
             <p class="title">Итого можете внести в качестве досрочных:</p>
 
             <div class="checkboxes__wrapper">
@@ -81,6 +87,7 @@ export default {
   },
   data() {
     return {
+      visible: false,
       modalFirst: false,
       checkboxValue:[],
       salary: "",
@@ -96,20 +103,16 @@ export default {
     inputSalary() {
       let sizeSalary = this.salary;
       let taxOfYear = sizeSalary * 12 * 0.13;
-      console.log(taxOfYear)
       return taxOfYear;
     },
   },
   methods: {
     calcSizePayoff() {
-        this.createTablePayoff(this.inputSalary)
+      this.createTablePayoff(this.inputSalary)
     },
     createTablePayoff(payoff) {
-      let blockHidden = document.querySelector('.hidden')
-      blockHidden.classList.remove('hidden')
-
+      this.visible = true
       let yearsOfPay = Math.ceil(maxSizePayoff / payoff)
-
       let sum = 0
 
       for (let i = 0; i <= yearsOfPay; ++i) {
@@ -135,7 +138,6 @@ export default {
         payoffObj.sumPayoff = payoff
         payoffObj.ending = this.declOfNum( year )
         this.arrPayoff.push(payoffObj)
-        // console.log('arrPayoff', this.arrPayoff)
       }
     },
     declOfNum(n) {
