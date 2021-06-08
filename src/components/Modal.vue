@@ -80,8 +80,7 @@ export default {
   border-radius: 30px
   z-index: 999
   overflow: hidden
-  @media screen and (min-width: 900px)
-    min-width: 500px
+
 
 .modal-header
   display: flex

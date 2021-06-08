@@ -83,28 +83,27 @@ export default {
     return {
       modalFirst: false,
       checkboxValue:[],
-      salary: null,
+      salary: "",
       arrPayoff: [],
       years: null
     }
   },
   computed: {
     isDisabledBtn() {
-      return (this.salary >= 12792)
+      return !(this.salary > 12791)
       // 12 792 руб. Размер МРОТ в 2021 году
     },
     inputSalary() {
       let sizeSalary = this.salary;
       let taxOfYear = sizeSalary * 12 * 0.13;
+      console.log(taxOfYear)
       return taxOfYear;
     },
   },
   methods: {
     calcSizePayoff() {
-        let payoff = this.inputSalary()
-        this.createTablePayoff(payoff)
+        this.createTablePayoff(this.inputSalary)
     },
-
     createTablePayoff(payoff) {
       let blockHidden = document.querySelector('.hidden')
       blockHidden.classList.remove('hidden')
@@ -136,7 +135,7 @@ export default {
         payoffObj.sumPayoff = payoff
         payoffObj.ending = this.declOfNum( year )
         this.arrPayoff.push(payoffObj)
-        console.log('arrPayoff', this.arrPayoff)
+        // console.log('arrPayoff', this.arrPayoff)
       }
     },
     declOfNum(n) {
@@ -152,6 +151,7 @@ export default {
 
 <style lang="sass">
 @import './assets/main.sass'
+@import './assets/media.sass'
 #app
   font-family: Avenir, Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
